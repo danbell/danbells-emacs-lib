@@ -14,10 +14,7 @@
 (global-set-key (kbd "C-x M-r") 'revert-buffer)
 (global-set-key (kbd "C-c g") 'goto-line)
 
-(autoload 'espresso-mode "espresso" "Start espresso-mode" t)
-(add-to-list 'auto-mode-alist '("\\.js$" . espresso-mode))
-(add-to-list 'auto-mode-alist '("\\.json$" . espresso-mode))
-(set-variable 'espresso-indent-level 2)
+(set-variable 'js-indent-level 2)
 
 (require 'jade-mode)
 
