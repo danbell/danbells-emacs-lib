@@ -2,13 +2,13 @@
 
 (setq
  backup-by-copying t      ; don't clobber symlinks
- backup-directory-alist '(("." . "~/.emacs-saves"))    ; don't litter my fs tree
+ backup-directory-alist '(("." . "~/.emacs-lib/saves"))    ; don't litter my fs tree
  delete-old-versions t
  kept-new-versions 6
  kept-old-versions 2
  version-control t)       ; use versioned backups
 
-(load "/home/daniel/.emacs-lib/nxhtml/autostart.el")
+(load "nxhtml/autostart.el")
 (global-set-key (kbd "C-c C-c") 'nxml-complete)
 
 (global-set-key (kbd "C-x M-r") 'revert-buffer)
