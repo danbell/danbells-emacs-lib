@@ -27,6 +27,8 @@
 (add-hook 'expresso-mode-hook
           (lambda () (flymake-mode t)))
 
+(add-to-list 'auto-mode-alist '("\\.json" . js-mode))
+
 ;;(add-hook 'javascript-mode-hook
 ;;  '(lambda ()
 ;;  (local-set-key [f8] 'jslint-thisfile)))
@@ -157,3 +159,12 @@ by using nxml's indentation rules."
 
 (autoload 'hide-lines "hide-lines" "Hide lines based on a regexp" t)
 (global-set-key "\C-ch" 'hide-lines)
+
+(global-set-key "%" 'match-paren)
+
+(defun match-paren (arg)
+  "Go to the matching paren if on a paren; otherwise insert %."
+  (interactive "p")
+  (cond ((looking-at "\\s\(") (forward-list 1) (backward-char 1))
+        ((looking-at "\\s\)") (forward-char 1) (backward-list 1))
+        (t (self-insert-command (or arg 1)))))
