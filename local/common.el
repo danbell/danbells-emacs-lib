@@ -59,9 +59,11 @@
 (setq-default indent-tabs-mode nil)
 
 ;; if indent-tabs-mode is off, untabify before saving
-(add-hook 'write-file-hooks 
+;; (this used 'write-file-hooks' for emacs23
+(add-hook 'before-save-hook
           (lambda () (if (not indent-tabs-mode)
-                         (untabify (point-min) (point-max)))))
+                         (untabify (point-min) (point-max))
+                       nil)))
 
 ;; from http://www.emacswiki.org/emacs/SwitchingBuffers#toc5
 (defun switch-buffers-between-frames ()
