@@ -1,4 +1,4 @@
 #!/bin/sh
 
 jshint $1
-jscheckstyle --emacs --violations $1
+#jscheckstyle --emacs --violations $1
