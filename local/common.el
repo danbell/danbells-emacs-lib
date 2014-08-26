@@ -8,47 +8,26 @@
  kept-old-versions 2
  version-control t)       ; use versioned backups
 
-(load "nxhtml/autostart.el")
-(global-set-key (kbd "C-c C-c") 'nxml-complete)
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                         ("marmalade" . "http://marmalade-repo.org/packages/")
+                         ("melpa" . "http://melpa.milkbox.net/packages/")))
+
+;;(global-set-key (kbd "C-c C-c") 'nxml-complete)
 
 (global-set-key (kbd "C-x M-r") 'revert-buffer)
 (global-set-key (kbd "C-c g") 'goto-line)
 
 (set-variable 'js-indent-level 2)
 
-(require 'jade-mode)
+(global-set-key (kbd "C-$") 'ag-project)
 
-;; javascript lint
-(defun jslint-thisfile ()
-  (interactive)
-  (compile (format "jsl -process %s" (buffer-file-name))))
+(add-hook 'after-init-hook #'global-flycheck-mode)
 
-(require 'flymake-js)
-(add-hook 'expresso-mode-hook
-          (lambda () (flymake-mode t)))
-
-(add-to-list 'auto-mode-alist '("\\.json" . js-mode))
-
-;;(add-hook 'javascript-mode-hook
-;;  '(lambda ()
-;;  (local-set-key [f8] 'jslint-thisfile)))
-
-(require 'magit)
-(global-set-key (kbd "C-c C-g") 'magit-status)
-
-(add-to-list 'load-path "~/.emacs-lib/yasnippet-0.6.1c")
-(require 'yasnippet) ;; not yasnippet-bundle
-(yas/initialize)
-(yas/load-directory "~/.emacs-lib/yasnippet-0.6.1c/snippets")
-
-(add-to-list 'load-path "~/.emacs-lib/cucumber")
-(load "feature-mode")
-
-;; load bundle snippets
-(yas/load-directory "~/.emacs-lib/cucumber/snippets")
-
-(add-to-list 'auto-mode-alist '("\\.feature" . feature-mode))
-(add-to-list 'auto-mode-alist '("\\.story" . feature-mode))
+(global-set-key 
+ (kbd "C-c C-g") 
+ (lambda () 
+   (interactive)
+   (call-interactively 'magit-status)))
 
 (require 'find-file-in-tags)
 (global-set-key (kbd "C-c C-f") 'find-file-in-tags)
@@ -155,9 +134,6 @@ by using nxml's indentation rules."
         (backward-char) (insert "\n"))
       (indent-region begin end))
     (message "Ah, much better!"))
-
-(autoload 'log4j-mode "log4j-mode" "Major mode for viewing log files." t)
-(add-to-list 'auto-mode-alist '("\\.log\\'" . log4j-mode))
 
 (autoload 'hide-lines "hide-lines" "Hide lines based on a regexp" t)
 (global-set-key "\C-ch" 'hide-lines)
